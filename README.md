@@ -14,3 +14,15 @@ The React Compiler is not enabled on this template because of its impact on dev 
 ## Expanding the ESLint configuration
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Traject API
+
+Mock backend for Traject, a job application tracker. Built with json-server 0.17.4.
+
+## Collections
+`companies`, `applications` (→ companyId), `interviews` (→ applicationId)
+
+## Run locally
+npm install && PORT=5005 npm start
+
+## Note
+Render's free tier resets this data on redeploy/wake — this is a mock API, not persistent storage.

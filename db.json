@@ -1,0 +1,984 @@
+{
+  "companies": [
+    {
+      "id": 1,
+      "name": "Feedzai",
+      "industry": "Fintech",
+      "size": "500-1000",
+      "hqCity": "Lisbon",
+      "website": "https://feedzai.com"
+    },
+    {
+      "id": 2,
+      "name": "Talkdesk",
+      "industry": "SaaS / CX",
+      "size": "1000-5000",
+      "hqCity": "Lisbon",
+      "website": "https://talkdesk.com"
+    },
+    {
+      "id": 3,
+      "name": "OutSystems",
+      "industry": "Low-code Platform",
+      "size": "1000-5000",
+      "hqCity": "Lisbon",
+      "website": "https://outsystems.com"
+    },
+    {
+      "id": 4,
+      "name": "Unbabel",
+      "industry": "AI / Translation",
+      "size": "200-500",
+      "hqCity": "Lisbon",
+      "website": "https://unbabel.com"
+    },
+    {
+      "id": 5,
+      "name": "Sword Health",
+      "industry": "Digital Health",
+      "size": "500-1000",
+      "hqCity": "Porto",
+      "website": "https://swordhealth.com"
+    },
+    {
+      "id": 6,
+      "name": "Remote",
+      "industry": "HR Tech",
+      "size": "1000-5000",
+      "hqCity": "Remote",
+      "website": "https://remote.com"
+    },
+    {
+      "id": 7,
+      "name": "Contentsquare",
+      "industry": "Analytics",
+      "size": "1000-5000",
+      "hqCity": "Porto",
+      "website": "https://contentsquare.com"
+    },
+    {
+      "id": 8,
+      "name": "Farfetch",
+      "industry": "E-commerce",
+      "size": "1000-5000",
+      "hqCity": "Lisbon",
+      "website": "https://farfetch.com"
+    },
+    {
+      "id": 9,
+      "name": "Critical TechWorks",
+      "industry": "Automotive Software",
+      "size": "500-1000",
+      "hqCity": "Porto",
+      "website": "https://criticaltechworks.com"
+    },
+    {
+      "id": 10,
+      "name": "Landing.jobs",
+      "industry": "Recruitment Tech",
+      "size": "10-50",
+      "hqCity": "Lisbon",
+      "website": "https://landing.jobs"
+    }
+  ],
+  "applications": [
+    {
+      "id": 1,
+      "companyId": 1,
+      "role": "Frontend Developer",
+      "status": "wishlist",
+      "workMode": "remote",
+      "location": "Lisbon, PT",
+      "salaryMin": 30000,
+      "salaryMax": 40000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "https://jobs.example.com/posting/1000",
+      "appliedDate": "2026-07-01",
+      "lastActivityDate": "2026-07-01",
+      "priority": 1,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 0
+    },
+    {
+      "id": 2,
+      "companyId": 2,
+      "role": "React Engineer",
+      "status": "wishlist",
+      "workMode": "hybrid",
+      "location": "Porto, PT",
+      "salaryMin": 31200,
+      "salaryMax": 41400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "",
+      "appliedDate": "2026-07-04",
+      "lastActivityDate": "2026-07-04",
+      "priority": 2,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 1
+    },
+    {
+      "id": 3,
+      "companyId": 3,
+      "role": "Full Stack Developer",
+      "status": "wishlist",
+      "workMode": "onsite",
+      "location": "Remote",
+      "salaryMin": 32400,
+      "salaryMax": 42800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "",
+      "appliedDate": "2026-07-07",
+      "lastActivityDate": "2026-07-07",
+      "priority": 3,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 2
+    },
+    {
+      "id": 4,
+      "companyId": 4,
+      "role": "UI Engineer",
+      "status": "wishlist",
+      "workMode": "remote",
+      "location": "Braga, PT",
+      "salaryMin": 33600,
+      "salaryMax": 44200,
+      "currency": "EUR",
+      "source": "Landing.jobs",
+      "jobUrl": "",
+      "appliedDate": "2026-07-10",
+      "lastActivityDate": "2026-07-10",
+      "priority": 1,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 3
+    },
+    {
+      "id": 5,
+      "companyId": 5,
+      "role": "Software Engineer",
+      "status": "wishlist",
+      "workMode": "hybrid",
+      "location": "Lisbon, PT",
+      "salaryMin": 34800,
+      "salaryMax": 45600,
+      "currency": "EUR",
+      "source": "AngelList",
+      "jobUrl": "https://jobs.example.com/posting/1004",
+      "appliedDate": "2026-07-13",
+      "lastActivityDate": "2026-07-13",
+      "priority": 2,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 4
+    },
+    {
+      "id": 6,
+      "companyId": 6,
+      "role": "Junior Developer",
+      "status": "wishlist",
+      "workMode": "onsite",
+      "location": "Porto, PT",
+      "salaryMin": 36000,
+      "salaryMax": 47000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "",
+      "appliedDate": "2026-07-11",
+      "lastActivityDate": "2026-07-11",
+      "priority": 3,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 5
+    },
+    {
+      "id": 7,
+      "companyId": 7,
+      "role": "JavaScript Developer",
+      "status": "wishlist",
+      "workMode": "remote",
+      "location": "Remote",
+      "salaryMin": 37200,
+      "salaryMax": 48400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "",
+      "appliedDate": "2026-07-14",
+      "lastActivityDate": "2026-07-14",
+      "priority": 1,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 6
+    },
+    {
+      "id": 8,
+      "companyId": 8,
+      "role": "Web Developer",
+      "status": "applied",
+      "workMode": "hybrid",
+      "location": "Braga, PT",
+      "salaryMin": 38400,
+      "salaryMax": 49800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "",
+      "appliedDate": "2026-07-17",
+      "lastActivityDate": "2026-07-25",
+      "priority": 2,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 7
+    },
+    {
+      "id": 9,
+      "companyId": 9,
+      "role": "Product Engineer",
+      "status": "applied",
+      "workMode": "onsite",
+      "location": "Lisbon, PT",
+      "salaryMin": 39600,
+      "salaryMax": 51200,
+      "currency": "EUR",
+      "source": "Landing.jobs",
+      "jobUrl": "https://jobs.example.com/posting/1008",
+      "appliedDate": "2026-07-20",
+      "lastActivityDate": "2026-07-29",
+      "priority": 3,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 8
+    },
+    {
+      "id": 10,
+      "companyId": 10,
+      "role": "Frontend Engineer II",
+      "status": "applied",
+      "workMode": "remote",
+      "location": "Porto, PT",
+      "salaryMin": 40800,
+      "salaryMax": 52600,
+      "currency": "EUR",
+      "source": "AngelList",
+      "jobUrl": "",
+      "appliedDate": "2026-07-23",
+      "lastActivityDate": "2026-08-02",
+      "priority": 1,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 9
+    },
+    {
+      "id": 11,
+      "companyId": 1,
+      "role": "Associate Software Engineer",
+      "status": "applied",
+      "workMode": "hybrid",
+      "location": "Remote",
+      "salaryMin": 30000,
+      "salaryMax": 40000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "",
+      "appliedDate": "2026-07-21",
+      "lastActivityDate": "2026-08-01",
+      "priority": 2,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 10
+    },
+    {
+      "id": 12,
+      "companyId": 2,
+      "role": "React Native Developer",
+      "status": "applied",
+      "workMode": "onsite",
+      "location": "Braga, PT",
+      "salaryMin": 31200,
+      "salaryMax": 41400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "",
+      "appliedDate": "2026-07-24",
+      "lastActivityDate": "2026-08-05",
+      "priority": 3,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 11
+    },
+    {
+      "id": 13,
+      "companyId": 3,
+      "role": "Frontend Developer",
+      "status": "applied",
+      "workMode": "remote",
+      "location": "Lisbon, PT",
+      "salaryMin": 32400,
+      "salaryMax": 42800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "https://jobs.example.com/posting/1012",
+      "appliedDate": "2026-07-27",
+      "lastActivityDate": "2026-07-28",
+      "priority": 1,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 12
+    },
+    {
+      "id": 14,
+      "companyId": 4,
+      "role": "React Engineer",
+      "status": "applied",
+      "workMode": "hybrid",
+      "location": "Porto, PT",
+      "salaryMin": 33600,
+      "salaryMax": 44200,
+      "currency": "EUR",
+      "source": "Landing.jobs",
+      "jobUrl": "",
+      "appliedDate": "2026-07-30",
+      "lastActivityDate": "2026-08-01",
+      "priority": 2,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 13
+    },
+    {
+      "id": 15,
+      "companyId": 5,
+      "role": "Full Stack Developer",
+      "status": "applied",
+      "workMode": "onsite",
+      "location": "Remote",
+      "salaryMin": 34800,
+      "salaryMax": 45600,
+      "currency": "EUR",
+      "source": "AngelList",
+      "jobUrl": "",
+      "appliedDate": "2026-08-03",
+      "lastActivityDate": "2026-08-06",
+      "priority": 3,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 14
+    },
+    {
+      "id": 16,
+      "companyId": 6,
+      "role": "UI Engineer",
+      "status": "applied",
+      "workMode": "remote",
+      "location": "Braga, PT",
+      "salaryMin": 36000,
+      "salaryMax": 47000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "",
+      "appliedDate": "2026-08-01",
+      "lastActivityDate": "2026-08-05",
+      "priority": 1,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 15
+    },
+    {
+      "id": 17,
+      "companyId": 7,
+      "role": "Software Engineer",
+      "status": "interviewing",
+      "workMode": "hybrid",
+      "location": "Lisbon, PT",
+      "salaryMin": 37200,
+      "salaryMax": 48400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "https://jobs.example.com/posting/1016",
+      "appliedDate": "2026-08-04",
+      "lastActivityDate": "2026-08-09",
+      "priority": 2,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 16
+    },
+    {
+      "id": 18,
+      "companyId": 8,
+      "role": "Junior Developer",
+      "status": "interviewing",
+      "workMode": "onsite",
+      "location": "Porto, PT",
+      "salaryMin": 38400,
+      "salaryMax": 49800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "",
+      "appliedDate": "2026-08-07",
+      "lastActivityDate": "2026-08-13",
+      "priority": 3,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 17
+    },
+    {
+      "id": 19,
+      "companyId": 9,
+      "role": "JavaScript Developer",
+      "status": "interviewing",
+      "workMode": "remote",
+      "location": "Remote",
+      "salaryMin": 39600,
+      "salaryMax": 51200,
+      "currency": "EUR",
+      "source": "Landing.jobs",
+      "jobUrl": "",
+      "appliedDate": "2026-08-10",
+      "lastActivityDate": "2026-08-17",
+      "priority": 1,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 18
+    },
+    {
+      "id": 20,
+      "companyId": 10,
+      "role": "Web Developer",
+      "status": "interviewing",
+      "workMode": "hybrid",
+      "location": "Braga, PT",
+      "salaryMin": 40800,
+      "salaryMax": 52600,
+      "currency": "EUR",
+      "source": "AngelList",
+      "jobUrl": "",
+      "appliedDate": "2026-08-13",
+      "lastActivityDate": "2026-08-21",
+      "priority": 2,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 19
+    },
+    {
+      "id": 21,
+      "companyId": 1,
+      "role": "Product Engineer",
+      "status": "interviewing",
+      "workMode": "onsite",
+      "location": "Lisbon, PT",
+      "salaryMin": 30000,
+      "salaryMax": 40000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "https://jobs.example.com/posting/1020",
+      "appliedDate": "2026-08-11",
+      "lastActivityDate": "2026-08-20",
+      "priority": 3,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "",
+      "order": 20
+    },
+    {
+      "id": 22,
+      "companyId": 2,
+      "role": "Frontend Engineer II",
+      "status": "interviewing",
+      "workMode": "remote",
+      "location": "Porto, PT",
+      "salaryMin": 31200,
+      "salaryMax": 41400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "",
+      "appliedDate": "2026-08-14",
+      "lastActivityDate": "2026-08-24",
+      "priority": 1,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "",
+      "order": 21
+    },
+    {
+      "id": 23,
+      "companyId": 3,
+      "role": "Associate Software Engineer",
+      "status": "offer",
+      "workMode": "hybrid",
+      "location": "Remote",
+      "salaryMin": 32400,
+      "salaryMax": 42800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "",
+      "appliedDate": "2026-08-17",
+      "lastActivityDate": "2026-08-28",
+      "priority": 2,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "Offer received, reviewing terms.",
+      "order": 22
+    },
+    {
+      "id": 24,
+      "companyId": 4,
+      "role": "React Native Developer",
+      "status": "offer",
+      "workMode": "onsite",
+      "location": "Braga, PT",
+      "salaryMin": 33600,
+      "salaryMax": 44200,
+      "currency": "EUR",
+      "source": "Landing.jobs",
+      "jobUrl": "",
+      "appliedDate": "2026-08-20",
+      "lastActivityDate": "2026-09-01",
+      "priority": 3,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "Offer received, reviewing terms.",
+      "order": 23
+    },
+    {
+      "id": 25,
+      "companyId": 5,
+      "role": "Frontend Developer",
+      "status": "offer",
+      "workMode": "remote",
+      "location": "Lisbon, PT",
+      "salaryMin": 34800,
+      "salaryMax": 45600,
+      "currency": "EUR",
+      "source": "AngelList",
+      "jobUrl": "https://jobs.example.com/posting/1024",
+      "appliedDate": "2026-08-23",
+      "lastActivityDate": "2026-08-24",
+      "priority": 1,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "Offer received, reviewing terms.",
+      "order": 24
+    },
+    {
+      "id": 26,
+      "companyId": 6,
+      "role": "React Engineer",
+      "status": "closed",
+      "workMode": "hybrid",
+      "location": "Porto, PT",
+      "salaryMin": 36000,
+      "salaryMax": 47000,
+      "currency": "EUR",
+      "source": "LinkedIn",
+      "jobUrl": "",
+      "appliedDate": "2026-08-21",
+      "lastActivityDate": "2026-08-23",
+      "priority": 2,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "Rejected after final round.",
+      "order": 25
+    },
+    {
+      "id": 27,
+      "companyId": 7,
+      "role": "Full Stack Developer",
+      "status": "closed",
+      "workMode": "onsite",
+      "location": "Remote",
+      "salaryMin": 37200,
+      "salaryMax": 48400,
+      "currency": "EUR",
+      "source": "Referral",
+      "jobUrl": "",
+      "appliedDate": "2026-08-24",
+      "lastActivityDate": "2026-08-27",
+      "priority": 3,
+      "tags": [
+        "react",
+        "frontend"
+      ],
+      "notes": "Rejected after final round.",
+      "order": 26
+    },
+    {
+      "id": 28,
+      "companyId": 8,
+      "role": "UI Engineer",
+      "status": "closed",
+      "workMode": "remote",
+      "location": "Braga, PT",
+      "salaryMin": 38400,
+      "salaryMax": 49800,
+      "currency": "EUR",
+      "source": "Company site",
+      "jobUrl": "",
+      "appliedDate": "2026-08-27",
+      "lastActivityDate": "2026-08-31",
+      "priority": 1,
+      "tags": [
+        "fullstack",
+        "javascript"
+      ],
+      "notes": "Rejected after final round.",
+      "order": 27
+    }
+  ],
+  "interviews": [
+    {
+      "id": 1,
+      "applicationId": 8,
+      "round": "screening",
+      "date": "2026-07-22T10:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "failed",
+      "notes": ""
+    },
+    {
+      "id": 2,
+      "applicationId": 12,
+      "round": "screening",
+      "date": "2026-07-27T10:00",
+      "interviewer": "Ana Silva",
+      "format": "video",
+      "outcome": "pending",
+      "notes": ""
+    },
+    {
+      "id": 3,
+      "applicationId": 16,
+      "round": "screening",
+      "date": "2026-08-05T10:00",
+      "interviewer": "Beatriz Santos",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "applicationId": 17,
+      "round": "screening",
+      "date": "2026-08-09T10:00",
+      "interviewer": "Nuno Almeida",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 5,
+      "applicationId": 17,
+      "round": "technical",
+      "date": "2026-08-13T11:00",
+      "interviewer": "Ana Silva",
+      "format": "video",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 6,
+      "applicationId": 17,
+      "round": "system-design",
+      "date": "2026-08-17T12:00",
+      "interviewer": "Rui Costa",
+      "format": "onsite",
+      "outcome": "failed",
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "applicationId": 18,
+      "round": "screening",
+      "date": "2026-08-10T10:00",
+      "interviewer": "Ana Silva",
+      "format": "video",
+      "outcome": "pending",
+      "notes": ""
+    },
+    {
+      "id": 8,
+      "applicationId": 19,
+      "round": "screening",
+      "date": "2026-08-14T10:00",
+      "interviewer": "Rui Costa",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 9,
+      "applicationId": 19,
+      "round": "technical",
+      "date": "2026-08-18T11:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 10,
+      "applicationId": 20,
+      "round": "screening",
+      "date": "2026-08-18T10:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 11,
+      "applicationId": 20,
+      "round": "technical",
+      "date": "2026-08-22T11:00",
+      "interviewer": "Tiago Ferreira",
+      "format": "video",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 12,
+      "applicationId": 20,
+      "round": "system-design",
+      "date": "2026-08-26T12:00",
+      "interviewer": "Beatriz Santos",
+      "format": "onsite",
+      "outcome": "failed",
+      "notes": ""
+    },
+    {
+      "id": 13,
+      "applicationId": 21,
+      "round": "screening",
+      "date": "2026-08-14T10:00",
+      "interviewer": "Tiago Ferreira",
+      "format": "video",
+      "outcome": "pending",
+      "notes": ""
+    },
+    {
+      "id": 14,
+      "applicationId": 22,
+      "round": "screening",
+      "date": "2026-08-18T10:00",
+      "interviewer": "Beatriz Santos",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 15,
+      "applicationId": 22,
+      "round": "technical",
+      "date": "2026-08-22T11:00",
+      "interviewer": "Nuno Almeida",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 16,
+      "applicationId": 23,
+      "round": "screening",
+      "date": "2026-08-22T10:00",
+      "interviewer": "Nuno Almeida",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 17,
+      "applicationId": 23,
+      "round": "technical",
+      "date": "2026-08-26T11:00",
+      "interviewer": "Ana Silva",
+      "format": "video",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 18,
+      "applicationId": 23,
+      "round": "system-design",
+      "date": "2026-08-30T12:00",
+      "interviewer": "Rui Costa",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 19,
+      "applicationId": 24,
+      "round": "screening",
+      "date": "2026-08-23T10:00",
+      "interviewer": "Ana Silva",
+      "format": "video",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 20,
+      "applicationId": 24,
+      "round": "technical",
+      "date": "2026-08-27T11:00",
+      "interviewer": "Rui Costa",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 21,
+      "applicationId": 24,
+      "round": "system-design",
+      "date": "2026-08-31T12:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 22,
+      "applicationId": 25,
+      "round": "screening",
+      "date": "2026-08-27T10:00",
+      "interviewer": "Rui Costa",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 23,
+      "applicationId": 25,
+      "round": "technical",
+      "date": "2026-08-31T11:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "passed",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 24,
+      "applicationId": 25,
+      "round": "system-design",
+      "date": "2026-09-04T12:00",
+      "interviewer": "Tiago Ferreira",
+      "format": "video",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 25,
+      "applicationId": 26,
+      "round": "screening",
+      "date": "2026-08-26T10:00",
+      "interviewer": "Marta Oliveira",
+      "format": "phone",
+      "outcome": "failed",
+      "notes": ""
+    },
+    {
+      "id": 26,
+      "applicationId": 27,
+      "round": "screening",
+      "date": "2026-08-27T10:00",
+      "interviewer": "Tiago Ferreira",
+      "format": "video",
+      "outcome": "passed",
+      "notes": ""
+    },
+    {
+      "id": 27,
+      "applicationId": 27,
+      "round": "technical",
+      "date": "2026-08-31T11:00",
+      "interviewer": "Beatriz Santos",
+      "format": "onsite",
+      "outcome": "pending",
+      "notes": "Live coding exercise, 60 min."
+    },
+    {
+      "id": 28,
+      "applicationId": 28,
+      "round": "screening",
+      "date": "2026-08-31T10:00",
+      "interviewer": "Beatriz Santos",
+      "format": "onsite",
+      "outcome": "passed",
+      "notes": ""
+    }
+  ]
+}
