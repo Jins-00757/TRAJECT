@@ -8,7 +8,7 @@ const links = [
 
 export default function Shell({ children }) {
   return (
-    <AppShell header={{ height: 56 }} padding="md">
+    <AppShell header={{ height: 58 }} padding="md">
       <AppShell.Header>
         <Group h="100%" px="md" justify="space-between">
           <Text fw={700}>Traject</Text>
