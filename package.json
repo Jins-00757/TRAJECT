@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "json-server db.json --host 0.0.0.0 --port 3000",
+    "dev:5005": "json-server db.json --host 0.0.0.0 --port 5005",
     "start": "json-server db.json --host 0.0.0.0 --port $PORT"
   },
   "dependencies": {
