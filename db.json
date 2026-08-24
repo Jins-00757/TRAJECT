@@ -6,8 +6,7 @@
       "industry": "Fintech",
       "size": "500-1000",
       "hqCity": "Lisbon",
-      "website": "https://feedzai.com",
-      "logo": "https://www.google.com/s2/favicons?domain=feedzai.com&sz=128"
+      "website": "https://feedzai.com"
     },
     {
       "id": 2,
@@ -15,8 +14,7 @@
       "industry": "SaaS / CX",
       "size": "1000-5000",
       "hqCity": "Lisbon",
-      "website": "https://talkdesk.com",
-      "logo": "https://www.google.com/s2/favicons?domain=talkdesk.com&sz=128"
+      "website": "https://talkdesk.com"
     },
     {
       "id": 3,
@@ -24,8 +22,7 @@
       "industry": "Low-code Platform",
       "size": "1000-5000",
       "hqCity": "Lisbon",
-      "website": "https://outsystems.com",
-      "logo": "https://www.google.com/s2/favicons?domain=outsystems.com&sz=128"
+      "website": "https://outsystems.com"
     },
     {
       "id": 4,
@@ -33,8 +30,7 @@
       "industry": "AI / Translation",
       "size": "200-500",
       "hqCity": "Lisbon",
-      "website": "https://unbabel.com",
-      "logo": "https://www.google.com/s2/favicons?domain=unbabel.com&sz=128"
+      "website": "https://unbabel.com"
     },
     {
       "id": 5,
@@ -42,8 +38,7 @@
       "industry": "Digital Health",
       "size": "500-1000",
       "hqCity": "Porto",
-      "website": "https://swordhealth.com",
-      "logo": "https://www.google.com/s2/favicons?domain=swordhealth.com&sz=128"
+      "website": "https://swordhealth.com"
     },
     {
       "id": 6,
@@ -51,8 +46,7 @@
       "industry": "HR Tech",
       "size": "1000-5000",
       "hqCity": "Remote",
-      "website": "https://remote.com",
-      "logo": "https://www.google.com/s2/favicons?domain=remote.com&sz=128"
+      "website": "https://remote.com"
     },
     {
       "id": 7,
@@ -60,8 +54,7 @@
       "industry": "Analytics",
       "size": "1000-5000",
       "hqCity": "Porto",
-      "website": "https://contentsquare.com",
-      "logo": "https://www.google.com/s2/favicons?domain=contentsquare.com&sz=128"
+      "website": "https://contentsquare.com"
     },
     {
       "id": 8,
@@ -69,8 +62,7 @@
       "industry": "E-commerce",
       "size": "1000-5000",
       "hqCity": "Lisbon",
-      "website": "https://farfetch.com",
-      "logo": "https://www.google.com/s2/favicons?domain=farfetch.com&sz=128"
+      "website": "https://farfetch.com"
     },
     {
       "id": 9,
@@ -78,8 +70,7 @@
       "industry": "Automotive Software",
       "size": "500-1000",
       "hqCity": "Porto",
-      "website": "https://criticaltechworks.com",
-      "logo": "https://www.google.com/s2/favicons?domain=criticaltechworks.com&sz=128"
+      "website": "https://criticaltechworks.com"
     },
     {
       "id": 10,
@@ -87,8 +78,7 @@
       "industry": "Recruitment Tech",
       "size": "10-50",
       "hqCity": "Lisbon",
-      "website": "https://landing.jobs",
-      "logo": "https://www.google.com/s2/favicons?domain=landing.jobs&sz=128"
+      "website": "https://landing.jobs"
     }
   ],
   "applications": [
@@ -699,7 +689,7 @@
       "source": "Company site",
       "jobUrl": "",
       "appliedDate": "2026-08-27",
-      "lastActivityDate": "2026-08-31",
+      "lastActivityDate": "2026-08-24",
       "priority": 1,
       "tags": [
         "fullstack",
@@ -939,16 +929,6 @@
       "format": "phone",
       "outcome": "passed",
       "notes": "Live coding exercise, 60 min."
-    },
-    {
-      "id": 24,
-      "applicationId": 25,
-      "round": "system-design",
-      "date": "2026-09-04T12:00",
-      "interviewer": "Tiago Ferreira",
-      "format": "video",
-      "outcome": "passed",
-      "notes": ""
     },
     {
       "id": 25,
