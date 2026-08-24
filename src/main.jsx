@@ -15,7 +15,7 @@ import { ApplicationsProvider } from './context/ApplicationsContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <MantineProvider theme={theme}>
+    <MantineProvider theme={theme} defaultColorScheme='auto'>
       <ModalsProvider>
         <Notifications position="top-right" />
         <BrowserRouter>

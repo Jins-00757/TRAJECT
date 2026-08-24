@@ -102,7 +102,7 @@
         "frontend"
       ],
       "notes": "",
-      "order": 0
+      "order": 8
     },
     {
       "id": 2,
@@ -212,7 +212,7 @@
         "javascript"
       ],
       "notes": "",
-      "order": 5
+      "order": 7
     },
     {
       "id": 7,
@@ -240,7 +240,7 @@
       "id": 8,
       "companyId": 8,
       "role": "Web Developer",
-      "status": "applied",
+      "status": "wishlist",
       "workMode": "hybrid",
       "location": "Braga, PT",
       "salaryMin": 38400,
@@ -249,14 +249,14 @@
       "source": "Company site",
       "jobUrl": "",
       "appliedDate": "2026-07-17",
-      "lastActivityDate": "2026-07-25",
+      "lastActivityDate": "2026-08-24",
       "priority": 2,
       "tags": [
         "fullstack",
         "javascript"
       ],
       "notes": "",
-      "order": 7
+      "order": 0
     },
     {
       "id": 9,
@@ -579,7 +579,7 @@
       "source": "Company site",
       "jobUrl": "",
       "appliedDate": "2026-08-17",
-      "lastActivityDate": "2026-08-28",
+      "lastActivityDate": "2026-08-24",
       "priority": 2,
       "tags": [
         "react",

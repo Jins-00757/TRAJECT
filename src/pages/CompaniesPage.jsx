@@ -6,6 +6,7 @@ import { getCompanies } from "../api/companies";
 import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
 import Empty from "../components/ui/Empty";
+import CompanyLogo from "../components/companies/CompanyLogo";
 
 export default function CompaniesPage() {
   const [companies, setCompanies] = useState(null);
@@ -29,7 +30,7 @@ export default function CompaniesPage() {
       <SimpleGrid cols={{ base: 1, sm: 2, md: 3 }} spacing="sm">
         {companies.map((c) => (
           <Card key={c.id} component={Link} to={`/companies/${c.id}`} withBorder>
-            <Text fw={600}>{c.name}</Text>
+            <Text fw={600}>{c.name}</Text> <CompanyLogo company={c} size="sm" />
             <Group gap={6} mt={4}>
               <Badge size="sm" variant="light">{c.industry}</Badge>
               <Text size="xs" c="dimmed">{c.hqCity}</Text>
