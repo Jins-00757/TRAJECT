@@ -16,29 +16,14 @@ export function ApplicationsProvider({ children }) {
       .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-
-    applicationsApi.getApplications()
-      .then((data) => {
-        if (!cancelled) {
-          setApplications(data);
-          setError(null);
-        }
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => { cancelled = true; };
-  }, []);
+   useEffect(() => {
+    refetch();
+  }, [refetch]);
 
   async function addApplication(data) {
     const created = await applicationsApi.createApplication(data);
-    setApplications((prev) => [...prev, created]);
+    const full = await applicationsApi.getApplication(created.id).catch(() => created);
+    setApplications((prev) => [...prev, full]);
     return created;
   }
 
@@ -56,7 +41,7 @@ export function ApplicationsProvider({ children }) {
 
   async function removeApplication(id) {
     await applicationsApi.deleteApplication(id);
-    setApplications((prev) => prev.filter((a) => a.id !== id));
+     setApplications((prev) => prev.filter((a) => String(a.id) !== String(id)));
   }
 
   return (

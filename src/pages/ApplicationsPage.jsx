@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { TextInput, Select, Table, Card, Stack, Group, Text, Box, Anchor } from "@mantine/core";
-import { IconSearch } from "@tabler/icons-react";
+import { IconSearch, IconPlus } from "@tabler/icons-react";
+import { Button } from "@mantine/core";
 import { Link, useNavigate } from "react-router-dom";
 import { getApplications } from "../api/applications";
 import { STATUS_OPTIONS } from "../lib/statusConfig";
@@ -71,7 +72,12 @@ function retry() {
 
   return (
     <Stack gap="md">
-      <Text fw={700} size="xl">Applications</Text>
+      <Group justify="space-between" wrap="wrap">
+  <Text fw={700} size="xl">Applications</Text>
+  <Button component={Link} to="/applications/new" leftSection={<IconPlus size={16} />}>
+    New application
+  </Button>
+</Group>
 
       <Group wrap="wrap" gap="sm">
         <TextInput
