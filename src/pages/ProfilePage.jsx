@@ -7,11 +7,8 @@ import {
   Button,
   Group,
   Card,
-  Avatar,
-  Box,
   FileInput,
   Alert,
-  Modal,
   Progress,
   Badge,
   Tabs,
@@ -24,7 +21,6 @@ import {
   IconAlertTriangle,
   IconRefresh,
   IconShield,
-  IconBell,
   IconPalette,
 } from '@tabler/icons-react';
 import UserAvatar from '../components/ui/UserAvatar';
@@ -32,7 +28,6 @@ import {
   compressImageToBase64,
   canStoreImage,
   getInitials,
-  formatBytes,
   safeLocalStorageSet,
   safeLocalStorageGet,
 } from '../lib/imageUtils';

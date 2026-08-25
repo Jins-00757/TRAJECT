@@ -8,17 +8,25 @@ export function ApplicationsProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const refetch = useCallback(() => {
-    setLoading(true);
-    return applicationsApi.getApplications()
-      .then((data) => { setApplications(data); setError(null); })
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, []);
+ const load = useCallback(() => {
+  return applicationsApi
+    .getApplications()
+    .then((data) => {
+      setApplications(data);
+      setError(null);
+    })
+    .catch((err) => setError(err.message))
+    .finally(() => setLoading(false));
+}, []);
 
-   useEffect(() => {
-    refetch();
-  }, [refetch]);
+useEffect(() => {
+  load();
+}, [load]);
+
+const refetch = useCallback(() => {
+  setLoading(true);
+  return load();
+}, [load]);
 
   async function addApplication(data) {
     const created = await applicationsApi.createApplication(data);
