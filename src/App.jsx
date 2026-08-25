@@ -9,6 +9,7 @@ import CompaniesPage from "./pages/CompaniesPage";
 import CompanyDetailPage from "./pages/CompanyDetailPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import InsightsPage from "./pages/InsightsPage"
+import ProfilePage from "./pages/ProfilePage";
 import Shell from "./components/layout/Shell";
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
     <Shell>
       <Routes>
         <Route path="/" element={<DashboardPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/board" element={<BoardPage />} />
         <Route path="/insights" element={<InsightsPage />} />
         <Route path="/applications" element={<ApplicationsPage />} />

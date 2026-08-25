@@ -94,3 +94,55 @@ export function computeStats(applications) {
   const stale = computeStaleApplications(applications).length;
   return { total, active, closed, offers, stale };
 }
+
+// Salary midpoint per application (min+max averaged), sorted ascending and
+// capped so the chart stays readable — applications with no salary data at
+// all are excluded rather than plotted as a false "0".
+export function computeSalaryRanges(applications, limit = 8) {
+  return applications
+    .filter((a) => a.salaryMin && a.salaryMax)
+    .map((a) => ({
+      name: a.company?.name || "Unknown",
+      min: a.salaryMin,
+      max: a.salaryMax,
+      mid: (a.salaryMin + a.salaryMax) / 2,
+    }))
+    .sort((a, b) => a.mid - b.mid)
+    .slice(0, limit);
+}
+
+// Applications submitted per calendar month (by appliedDate). Bucketed by a
+// sortable "YYYY-MM" key first, THEN formatted to a display label — sorting
+// the display label directly ("Aug 26" vs "Jul 26") would sort alphabetically,
+// not chronologically, which silently scrambles the x-axis once the data
+// spans a year boundary.
+export function computeMonthlyTimeline(applications) {
+  const buckets = new Map();
+  for (const a of applications) {
+    if (!a.appliedDate) continue;
+    const d = new Date(`${a.appliedDate}T00:00:00`);
+    const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`;
+    buckets.set(key, (buckets.get(key) ?? 0) + 1);
+  }
+  return [...buckets.keys()].sort().map((key) => ({
+    key,
+    month: new Date(`${key}-01T00:00:00`).toLocaleString("default", { month: "short", year: "2-digit" }),
+    applications: buckets.get(key),
+  }));
+}
+
+// Three-way status split for the pie chart: in-progress (wishlist, applied,
+// interviewing — anything still moving), offers, and closed. Adds up to
+// `applications.length` exactly, unlike the funnel above, which double-counts
+// on purpose (cumulative reached-stage) — these two are answering different
+// questions and shouldn't be expected to match.
+export function computeStatusBreakdown(applications) {
+  const closed = applications.filter((a) => a.status === "closed").length;
+  const offers = applications.filter((a) => a.status === "offer").length;
+  const inProgress = applications.length - closed - offers;
+  return [
+    { name: "In progress", value: inProgress },
+    { name: "Offers", value: offers },
+    { name: "Closed", value: closed },
+  ];
+}

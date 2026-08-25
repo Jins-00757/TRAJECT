@@ -7,9 +7,11 @@ import { getApplications } from "../api/applications";
 import { STATUS_OPTIONS } from "../lib/statusConfig";
 import { formatSalary, formatDate } from "../lib/format";
 import StatusBadge from "../components/applications/StatusBadge";
-import Loader from "../components/ui/Loader";
+//import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
 import Empty from "../components/ui/Empty";
+import { ApplicationCardsSkeletons } from "../components/ui/Skeletons";
+
 
 // Search is server-side (json-server's `q` full-text param), not a client-side
 // .filter() over an already-fetched array — debounced so typing doesn't fire
@@ -102,7 +104,8 @@ function retry() {
       </Group>
 
       {error && <ErrorState message={error} onRetry={retry} />}
-      {!error && !applications && <Loader label="Loading applications…" />}
+     {!error && !applications && <ApplicationCardsSkeletons />}
+
       {!error && applications && applications.length === 0 && <Empty message="No applications match those filters." />}
 
       {!error && applications && applications.length > 0 && (
