@@ -36,6 +36,7 @@ import StatusBadge from "../components/applications/StatusBadge";
 import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
 import LogInterviewModal from "../components/interviews/LogInterviewModal";
+import DocumentsCard from "../components/applications/DocumentsCard";
 
 export default function ApplicationDetailPage() {
   const { id } = useParams();
@@ -224,6 +225,8 @@ export default function ApplicationDetailPage() {
           </Group>
         </Stack>
       </Card>
+
+      <DocumentsCard applicationId={id}/>
 
       <Group justify="space-between" mb="sm">
         <Text fw={600}>Interview timeline</Text>

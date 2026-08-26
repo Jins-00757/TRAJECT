@@ -1906,6 +1906,16 @@
       "date": "2026-08-01T10:19",
       "notes": "",
       "id": 41
+    },
+    {
+      "applicationId": 34,
+      "round": "screening",
+      "interviewer": "henis",
+      "format": "onsite",
+      "outcome": "pending",
+      "date": "2026-08-26T11:49",
+      "notes": "",
+      "id": 42
     }
   ]
 }

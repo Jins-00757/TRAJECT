@@ -1,5 +1,5 @@
 // src/pages/ProfilePage.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   Stack,
   Text,
@@ -12,8 +12,8 @@ import {
   Progress,
   Badge,
   Tabs,
-} from '@mantine/core';
-import { notifications } from '@mantine/notifications';
+} from "@mantine/core";
+import { notifications } from "@mantine/notifications";
 import {
   IconCheck,
   IconX,
@@ -22,22 +22,23 @@ import {
   IconRefresh,
   IconShield,
   IconPalette,
-} from '@tabler/icons-react';
-import UserAvatar from '../components/ui/UserAvatar';
+} from "@tabler/icons-react";
+import UserAvatar from "../components/ui/UserAvatar";
 import {
   compressImageToBase64,
   canStoreImage,
   getInitials,
   safeLocalStorageSet,
   safeLocalStorageGet,
-} from '../lib/imageUtils';
+} from "../lib/imageUtils";
+import PortfolioLinksSection from "../components/profile/Portfoliolinkssection";
 
-const PROFILE_STORAGE_KEY = 'traject_user_profile';
-const THEME_STORAGE_KEY = 'traject_user_theme';
+const PROFILE_STORAGE_KEY = "traject_user_profile";
+const THEME_STORAGE_KEY = "traject_user_theme";
 
 /**
  * User profile page with avatar upload, settings, and preferences.
- * 
+ *
  * Features:
  * - Avatar upload with compression
  * - Name/email storage
@@ -47,13 +48,13 @@ const THEME_STORAGE_KEY = 'traject_user_theme';
  * - localStorage persistence
  */
 export default function ProfilePage() {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [avatarBase64, setAvatarBase64] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
-  const [savedState, setSavedState] = useState('saved'); // 'saved' | 'unsaved' | 'saving'
+  const [savedState, setSavedState] = useState("saved"); // 'saved' | 'unsaved' | 'saving'
 
   // Load profile from localStorage on mount
   useEffect(() => {
@@ -61,12 +62,12 @@ export default function ProfilePage() {
     if (stored) {
       try {
         const profile = JSON.parse(stored);
-        setName(profile.name || '');
-        setEmail(profile.email || '');
+        setName(profile.name || "");
+        setEmail(profile.email || "");
         setAvatarBase64(profile.avatar || null);
-        setSavedState('saved');
+        setSavedState("saved");
       } catch (e) {
-        console.error('Failed to load profile:', e);
+        console.error("Failed to load profile:", e);
       }
     }
   }, []);
@@ -94,9 +95,10 @@ export default function ProfilePage() {
         setShowSizeWarning(true);
         setUploadProgress(0);
         notifications.show({
-          title: 'Image too large',
-          message: 'After compression, this image still exceeds storage limits. Try a smaller file.',
-          color: 'orange',
+          title: "Image too large",
+          message:
+            "After compression, this image still exceeds storage limits. Try a smaller file.",
+          color: "orange",
           icon: <IconAlertTriangle size={16} />,
           autoClose: 4000,
         });
@@ -107,12 +109,12 @@ export default function ProfilePage() {
       setAvatarBase64(compressed);
       setUploadProgress(100);
       setShowSizeWarning(false);
-      setSavedState('unsaved');
+      setSavedState("unsaved");
 
       notifications.show({
-        title: 'Avatar updated',
-        message: 'Your new avatar is ready. Save your profile to persist it.',
-        color: 'teal',
+        title: "Avatar updated",
+        message: "Your new avatar is ready. Save your profile to persist it.",
+        color: "teal",
         icon: <IconCheck size={16} />,
         autoClose: 3000,
       });
@@ -121,9 +123,9 @@ export default function ProfilePage() {
       setTimeout(() => setUploadProgress(0), 500);
     } catch (err) {
       notifications.show({
-        title: 'Upload failed',
+        title: "Upload failed",
         message: err.message,
-        color: 'red',
+        color: "red",
         icon: <IconX size={16} />,
         autoClose: 4000,
       });
@@ -140,25 +142,25 @@ export default function ProfilePage() {
     // Validation
     if (!name.trim()) {
       notifications.show({
-        title: 'Name required',
-        message: 'Please enter your name.',
-        color: 'orange',
+        title: "Name required",
+        message: "Please enter your name.",
+        color: "orange",
         icon: <IconAlertTriangle size={16} />,
       });
       return;
     }
 
-    if (email && !email.includes('@')) {
+    if (email && !email.includes("@")) {
       notifications.show({
-        title: 'Invalid email',
-        message: 'Please enter a valid email address.',
-        color: 'orange',
+        title: "Invalid email",
+        message: "Please enter a valid email address.",
+        color: "orange",
         icon: <IconAlertTriangle size={16} />,
       });
       return;
     }
 
-    setSavedState('saving');
+    setSavedState("saving");
 
     const profile = {
       name: name.trim(),
@@ -169,24 +171,24 @@ export default function ProfilePage() {
 
     const result = safeLocalStorageSet(
       PROFILE_STORAGE_KEY,
-      JSON.stringify(profile)
+      JSON.stringify(profile),
     );
 
     if (result.success) {
-      setSavedState('saved');
+      setSavedState("saved");
       notifications.show({
-        title: 'Profile saved',
+        title: "Profile saved",
         message: `Nice to meet you, ${name}!`,
-        color: 'teal',
+        color: "teal",
         icon: <IconCheck size={16} />,
         autoClose: 3000,
       });
     } else {
-      setSavedState('unsaved');
+      setSavedState("unsaved");
       notifications.show({
-        title: 'Save failed',
-        message: result.error || 'Could not save profile',
-        color: 'red',
+        title: "Save failed",
+        message: result.error || "Could not save profile",
+        color: "red",
         icon: <IconX size={16} />,
         autoClose: 4000,
       });
@@ -198,36 +200,40 @@ export default function ProfilePage() {
    */
   function resetProfile() {
     const confirmed = window.confirm(
-      'This will permanently clear your profile data. Are you sure?'
+      "This will permanently clear your profile data. Are you sure?",
     );
     if (!confirmed) return;
 
-    setName('');
-    setEmail('');
+    setName("");
+    setEmail("");
     setAvatarBase64(null);
     localStorage.removeItem(PROFILE_STORAGE_KEY);
-    setSavedState('saved');
+    setSavedState("saved");
 
     notifications.show({
-      title: 'Profile cleared',
-      message: 'Your profile data has been reset.',
-      color: 'gray',
+      title: "Profile cleared",
+      message: "Your profile data has been reset.",
+      color: "gray",
       icon: <IconRefresh size={16} />,
     });
   }
 
-  const isModified = savedState !== 'saved';
-  const initials = getInitials(name || 'You');
+  const isModified = savedState !== "saved";
+  const initials = getInitials(name || "You");
 
   return (
-    <Stack gap="md" style={{ maxWidth: '600px', margin: '0 auto' }}>
+    <Stack gap="md" style={{ maxWidth: "600px", margin: "0 auto" }}>
       <div>
         <Group justify="space-between" wrap="wrap" mb="xs">
           <Text fw={700} size="xl">
             Your profile
           </Text>
           {isModified && (
-            <Badge color="orange" size="sm" leftSection={<IconAlertTriangle size={12} />}>
+            <Badge
+              color="orange"
+              size="sm"
+              leftSection={<IconAlertTriangle size={12} />}
+            >
               Unsaved changes
             </Badge>
           )}
@@ -262,7 +268,7 @@ export default function ProfilePage() {
                   </Text>
                   <Group gap="md" align="flex-start">
                     <UserAvatar
-                      name={name || 'You'}
+                      name={name || "You"}
                       image={avatarBase64}
                       size="lg"
                     />
@@ -297,7 +303,7 @@ export default function ProfilePage() {
                   value={name}
                   onChange={(e) => {
                     setName(e.currentTarget.value);
-                    setSavedState('unsaved');
+                    setSavedState("unsaved");
                   }}
                   withAsterisk
                   size="md"
@@ -311,42 +317,43 @@ export default function ProfilePage() {
                   value={email}
                   onChange={(e) => {
                     setEmail(e.currentTarget.value);
-                    setSavedState('unsaved');
+                    setSavedState("unsaved");
                   }}
                   size="md"
                 />
 
                 <Group justify="flex-end" gap="sm">
-                  <Button
-                    variant="light"
-                    color="gray"
-                    onClick={resetProfile}
-                  >
+                  <Button variant="light" color="gray" onClick={resetProfile}>
                     Clear data
                   </Button>
                   <Button
                     onClick={saveProfile}
-                    loading={savedState === 'saving'}
-                    color={isModified ? 'blue' : 'gray'}
+                    loading={savedState === "saving"}
+                    color={isModified ? "blue" : "gray"}
                   >
-                    {savedState === 'saving' ? 'Saving...' : 'Save profile'}
+                    {savedState === "saving" ? "Saving..." : "Save profile"}
                   </Button>
                 </Group>
               </Stack>
             </Card>
 
             {showSizeWarning && (
-              <Alert icon={<IconAlertTriangle />} color="orange" title="Storage limit reached">
-                Your avatar image is too large even after compression. Try a smaller or lower-resolution file.
+              <Alert
+                icon={<IconAlertTriangle />}
+                color="orange"
+                title="Storage limit reached"
+              >
+                Your avatar image is too large even after compression. Try a
+                smaller or lower-resolution file.
               </Alert>
             )}
           </Stack>
         </Tabs.Panel>
 
         <Tabs.Panel value="settings">
-          <Card withBorder mt="md">
-            <Text size="sm" c="dimmed">Settings will be added in a future update.</Text>
-          </Card>
+          <Stack gap="md" mt="md">
+            <PortfolioLinksSection />
+          </Stack>
         </Tabs.Panel>
 
         <Tabs.Panel value="privacy">
@@ -357,7 +364,8 @@ export default function ProfilePage() {
                   📱 Local storage only
                 </Text>
                 <Text size="xs" c="dimmed">
-                  Your profile is stored only in your browser. It does not sync to other devices.
+                  Your profile is stored only in your browser. It does not sync
+                  to other devices.
                 </Text>
               </div>
               <div>
@@ -365,7 +373,8 @@ export default function ProfilePage() {
                   🔐 No cloud sync
                 </Text>
                 <Text size="xs" c="dimmed">
-                  Your data is yours. Clearing browser data will remove your profile.
+                  Your data is yours. Clearing browser data will remove your
+                  profile.
                 </Text>
               </div>
             </Stack>
