@@ -462,7 +462,7 @@
         "javascript"
       ],
       "notes": "",
-      "order": 0
+      "order": 4
     },
     {
       "id": 2,
@@ -506,7 +506,7 @@
         "typescript"
       ],
       "notes": "",
-      "order": 2
+      "order": 13
     },
     {
       "id": 4,
@@ -572,7 +572,7 @@
         "frontend"
       ],
       "notes": "",
-      "order": 5
+      "order": 41
     },
     {
       "id": 7,
@@ -798,7 +798,7 @@
       "id": 17,
       "companyId": 2,
       "role": "Junior Developer",
-      "status": "offer",
+      "status": "interviewing",
       "workMode": "hybrid",
       "location": "Lisbon, PT",
       "salaryMin": 42000,
@@ -807,14 +807,14 @@
       "source": "Glassdoor",
       "jobUrl": "",
       "appliedDate": "2026-07-15",
-      "lastActivityDate": "2026-08-02",
+      "lastActivityDate": "2026-08-25",
       "priority": 3,
       "tags": [
         "react",
         "typescript"
       ],
       "notes": "Offer received, reviewing terms.",
-      "order": 16
+      "order": 8.5
     },
     {
       "id": 18,
@@ -1475,6 +1475,20 @@
       ],
       "notes": "Rejected after final round.",
       "order": 46
+    },
+    {
+      "status": "wishlist",
+      "currency": "EUR",
+      "priority": 3,
+      "tags": [],
+      "role": "salesforce",
+      "companyId": 2,
+      "salaryMin": null,
+      "salaryMax": null,
+      "notes": "",
+      "appliedDate": "2026-08-26",
+      "lastActivityDate": "2026-08-26",
+      "id": 48
     }
   ],
   "interviews": [
