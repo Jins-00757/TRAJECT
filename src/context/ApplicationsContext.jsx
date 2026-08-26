@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 import * as applicationsApi from "../api/applications";
+import { calculateQualityScore } from '../lib/qualityScoreCalculator';
 
 const ApplicationsContext = createContext(null);
 
@@ -8,16 +9,25 @@ export function ApplicationsProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+   // Helper function to add quality scores to applications
+  const enrichApplicationsWithScores = useCallback((apps) => {
+    return apps.map(app => ({
+      ...app,
+      qualityScore: calculateQualityScore(app)
+    }));
+  }, []);
+
  const load = useCallback(() => {
   return applicationsApi
     .getApplications()
     .then((data) => {
-      setApplications(data);
+      const enrichedData = enrichApplicationsWithScores(data);
+      setApplications(enrichedData);
       setError(null);
     })
     .catch((err) => setError(err.message))
     .finally(() => setLoading(false));
-}, []);
+}, [enrichApplicationsWithScores]);
 
 useEffect(() => {
   load();
@@ -29,20 +39,54 @@ const refetch = useCallback(() => {
 }, [load]);
 
   async function addApplication(data) {
-    const created = await applicationsApi.createApplication(data);
+
+    // Calculate quality score before sending
+    const dataWithScore = {
+      ...data,
+      qualityScore: calculateQualityScore(data)
+    };
+
+
+    const created = await applicationsApi.createApplication(dataWithScore);
     const full = await applicationsApi.getApplication(created.id).catch(() => created);
-    setApplications((prev) => [...prev, full]);
-    return created;
+    // Ensure quality score is on the returned object
+    const enriched = {
+      ...full,
+      qualityScore: calculateQualityScore(full)
+    };
+    setApplications((prev) => [...prev, enriched]);
+    return enriched;
   }
 
   async function patchApplication(id, patch) {
-    setApplications((prev) => prev.map((a) => (a.id === id ? { ...a, ...patch } : a)));
+    // Calculate quality score for the patched application
+    const currentApp = applications.find(a => a.id === id);
+    if (!currentApp) throw new Error("Application not found");
+
+    const updatedAppData = { ...currentApp, ...patch };
+    const qualityScore = calculateQualityScore(updatedAppData);
+
+    // Optimistic update with quality score
+    setApplications((prev) =>
+      prev.map((a) =>
+        a.id === id ? { ...a, ...patch, qualityScore } : a
+      )
+    );
     try {
       const updated = await applicationsApi.updateApplication(id, patch);
-      setApplications((prev) => prev.map((a) => (a.id === id ? updated : a)));
-      return updated;
+      
+      // Ensure quality score is on the returned object
+      const enriched = {
+        ...updated,
+        qualityScore: calculateQualityScore(updated)
+      };
+      
+      setApplications((prev) =>
+        prev.map((a) => (a.id === id ? enriched : a))
+      );
+      return enriched;
     } catch (err) {
-      await refetch(); // roll the optimistic change back to server truth
+      await refetch(); // Roll back on error
       throw err;
     }
   }

@@ -37,6 +37,7 @@ import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
 import LogInterviewModal from "../components/interviews/LogInterviewModal";
 import DocumentsCard from "../components/applications/DocumentsCard";
+import { QualityScoreCard } from "../components/QualityScoreCard";
 
 export default function ApplicationDetailPage() {
   const { id } = useParams();
@@ -172,6 +173,7 @@ export default function ApplicationDetailPage() {
 
   return (
     <Stack gap="md">
+      <QualityScoreCard application={application} />
       <Anchor component={Link} to="/applications" size="sm">
         <Group gap={4}>
           <IconArrowLeft size={14} /> Back to applications
