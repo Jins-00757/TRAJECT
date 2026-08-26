@@ -21,7 +21,14 @@ import {
   IconTrash,
   IconCheck,
   IconX,
+  IconCalendarPlus,
+  IconBrandGoogle,
 } from "@tabler/icons-react";
+import {
+  buildInterviewICS,
+  downloadICS,
+  buildGoogleCalendarUrl,
+} from "../lib/ics";
 import { getApplication } from "../api/applications";
 import { deleteInterview } from "../api/interviews";
 import { formatSalary, formatDate } from "../lib/format";
@@ -72,6 +79,38 @@ export default function ApplicationDetailPage() {
     refresh();
   }
 
+  function handleAddToCalendar(iv) {
+    try {
+      const ics = buildInterviewICS({
+        uid: `interview-${iv.id}@traject.app`,
+        dateStr: iv.date,
+        durationMinutes: 60,
+        summary: `${iv.round} interview — ${application.role} at ${application.company?.name ?? "—"}`,
+        description: [
+          `Interviewer: ${iv.interviewer}`,
+          `Format: ${iv.format}`,
+          iv.notes ? `Notes: ${iv.notes}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+        location:
+          iv.format === "onsite"
+            ? (application.company?.hqCity ?? "")
+            : iv.format,
+      });
+      downloadICS(
+        `${application.role.replace(/\s+/g, "-").toLowerCase()}-${iv.round}`,
+        ics,
+      );
+    } catch (err) {
+      notifications.show({
+        title: "Couldn't create calendar file",
+        message: err.message,
+        color: "red",
+      });
+    }
+  }
+
   function confirmDeleteInterview(interview) {
     modals.openConfirmModal({
       title: "Delete this interview?",
@@ -97,6 +136,34 @@ export default function ApplicationDetailPage() {
         }
       },
     });
+  }
+
+  function handleAddToGoogleCalendar(iv) {
+    try {
+      const url = buildGoogleCalendarUrl({
+        dateStr: iv.date,
+        durationMinutes: 60,
+        summary: `${iv.round} interview — ${application.role} at ${application.company?.name ?? "—"}`,
+        description: [
+          `Interviewer: ${iv.interviewer}`,
+          `Format: ${iv.format}`,
+          iv.notes ? `Notes: ${iv.notes}` : null,
+        ]
+          .filter(Boolean)
+          .join("\n"),
+        location:
+          iv.format === "onsite"
+            ? (application.company?.hqCity ?? "")
+            : iv.format,
+      });
+      window.open(url, "_blank", "noopener,noreferrer");
+    } catch (err) {
+      notifications.show({
+        title: "Couldn't open Google Calendar",
+        message: err.message,
+        color: "red",
+      });
+    }
   }
 
   if (error) return <ErrorState message={error} onRetry={retry} />;
@@ -158,19 +225,19 @@ export default function ApplicationDetailPage() {
         </Stack>
       </Card>
 
-      <div>
-        <Group justify="space-between" mb="sm">
-          <Text fw={600}>Interview timeline</Text>
-          <Button
-            size="xs"
-            variant="light"
-            leftSection={<IconPlus size={14} />}
-            onClick={() => setLogModalOpen(true)}
-          >
-            Log interview
-          </Button>
-        </Group>
+      <Group justify="space-between" mb="sm">
+        <Text fw={600}>Interview timeline</Text>
+        <Button
+          size="xs"
+          variant="light"
+          leftSection={<IconPlus size={14} />}
+          onClick={() => setLogModalOpen(true)}
+        >
+          Log interview
+        </Button>
+      </Group>
 
+      <div>
         {application.interviews?.length ? (
           <Timeline active={application.interviews.length} bulletSize={20}>
             {application.interviews.map((iv) => (
@@ -188,16 +255,33 @@ export default function ApplicationDetailPage() {
                       {formatDate(iv.date)} — {iv.outcome}
                     </Text>
                   </div>
-                  <ActionIcon
-                    variant="subtle"
-                    color="red"
-                    size="sm"
-                    style={{ flexShrink: 0 }}
-                    onClick={() => confirmDeleteInterview(iv)}
-                    aria-label="Delete interview"
-                  >
-                    <IconTrash size={14} />
-                  </ActionIcon>
+                  <Group gap={4} style={{ flexShrink: 0 }}>
+                    <ActionIcon
+                      variant="subtle"
+                      size="sm"
+                      onClick={() => handleAddToGoogleCalendar(iv)}
+                      aria-label="Add to Google Calendar"
+                    >
+                      <IconBrandGoogle size={14} />
+                    </ActionIcon>
+                    <ActionIcon
+                      variant="subtle"
+                      size="sm"
+                      onClick={() => handleAddToCalendar(iv)}
+                      aria-label="Download .ics calendar file"
+                    >
+                      <IconCalendarPlus size={14} />
+                    </ActionIcon>
+                    <ActionIcon
+                      variant="subtle"
+                      color="red"
+                      size="sm"
+                      onClick={() => confirmDeleteInterview(iv)}
+                      aria-label="Delete interview"
+                    >
+                      <IconTrash size={14} />
+                    </ActionIcon>
+                  </Group>
                 </Group>
               </Timeline.Item>
             ))}
