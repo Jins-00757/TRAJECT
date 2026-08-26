@@ -439,6 +439,11 @@
       "size": "51-200",
       "description": "Regulatory compliance and KYC automation platform for financial institutions.",
       "logo": "https://logo.clearbit.com/vialink.pt?size=200"
+    },
+    {
+      "name": "fezzadi",
+      "website": "",
+      "id": 41
     }
   ],
   "applications": [
