@@ -173,7 +173,7 @@ export default function ApplicationDetailPage() {
 
   return (
     <Stack gap="md">
-      <QualityScoreCard application={application} />
+      
       <Anchor component={Link} to="/applications" size="sm">
         <Group gap={4}>
           <IconArrowLeft size={14} /> Back to applications
@@ -297,6 +297,7 @@ export default function ApplicationDetailPage() {
           </Text>
         )}
       </div>
+      <QualityScoreCard application={application} />
 
       <Button
         component={Link}
