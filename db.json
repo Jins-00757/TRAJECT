@@ -512,7 +512,7 @@
       "id": 4,
       "companyId": 19,
       "role": "React Engineer",
-      "status": "interviewing",
+      "status": "offer",
       "workMode": "remote",
       "location": "Lisbon, PT",
       "salaryMin": 40000,
@@ -521,14 +521,14 @@
       "source": "Indeed",
       "jobUrl": "https://jobs.example.com/posting/1004",
       "appliedDate": "2026-06-22",
-      "lastActivityDate": "2026-07-06",
+      "lastActivityDate": "2026-08-26",
       "priority": 3,
       "tags": [
         "vue",
         "frontend"
       ],
       "notes": "",
-      "order": 3
+      "order": 5
     },
     {
       "id": 5,
@@ -1326,7 +1326,7 @@
       "id": 41,
       "companyId": 37,
       "role": "Associate Software Engineer",
-      "status": "interviewing",
+      "status": "offer",
       "workMode": "hybrid",
       "location": "Lisbon, PT",
       "salaryMin": 30000,
@@ -1335,7 +1335,7 @@
       "source": "AngelList",
       "jobUrl": "",
       "appliedDate": "2026-08-21",
-      "lastActivityDate": "2026-08-31",
+      "lastActivityDate": "2026-08-26",
       "priority": 2,
       "tags": [
         "node",

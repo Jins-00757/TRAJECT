@@ -22,17 +22,18 @@
     "@mantine/notifications": "^9.5.1",
     "@tabler/icons-react": "^3.46.0",
     "axios": "^1.19.0",
+    "canvas-confetti": "^1.9.4",
     "dayjs": "^1.11.23",
     "final-form": "^5.0.1",
+    "json": "^11.0.0",
+    "json-server": "0.17.4",
     "motion": "^13.1.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-final-form": "^7.0.1",
     "react-router-dom": "^7.18.2",
-    "recharts": "^3.10.1"
-    ,"json": "^11.0.0"
-    ,"json-server": "0.17.4"
-    ,"server": "^1.0.42"
+    "recharts": "^3.10.1",
+    "server": "^1.0.42"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

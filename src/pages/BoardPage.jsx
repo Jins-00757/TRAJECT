@@ -18,6 +18,7 @@ import BoardColumn from "../components/board/BoardColumn";
 import { BoardCardOverlay } from "../components/board/BoardCard";
 import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
+import { celebrateOffer } from "../lib/confetti";
 
 export default function BoardPage() {
   const { applications, loading, error, refetch, patchApplication } =
@@ -113,13 +114,14 @@ export default function BoardPage() {
     try {
       await patchApplication(moved.id, patch);
       if (statusChanged) {
+        if (destStatus === "offer") celebrateOffer();
         const fromLabel = STATUS_MAP[sourceStatus].label;
         const toLabel = STATUS_MAP[destStatus].label;
         const id = notifications.show({
           message: (
             <Group justify="space-between" wrap="nowrap" gap="sm">
               <Text size="sm">
-                {moved.role} moved {fromLabel} → {toLabel}
+                {destStatus === "offer" ? "🎉 " : ""}{moved.role} moved {fromLabel} → {toLabel}
               </Text>
               <Button
                 size="xs"

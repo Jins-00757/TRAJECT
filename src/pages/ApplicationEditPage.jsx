@@ -11,6 +11,7 @@ import { getCompanies } from "../api/companies";
 import { useApplications } from "../context/ApplicationsContext";
 import Loader from "../components/ui/Loader";
 import ErrorState from "../components/ui/ErrorState";
+import { celebrateOffer } from "../lib/confetti";
 
 export default function ApplicationEditPage() {
   const { id } = useParams();
@@ -76,8 +77,11 @@ export default function ApplicationEditPage() {
       // working on, instead of forever showing the same 5 seed rows.
       lastActivityDate: new Date().toISOString().slice(0, 10),
     };
+    const becameOffer = application.status !== "offer" && values.status === "offer";
+  
     try {
       await patchApplication(id, payload);
+      if (becameOffer) celebrateOffer();
       notifications.show({
         title: "Application updated",
         message: `${values.role} saved.`,
