@@ -20,7 +20,14 @@ A job search is a pipeline whether you track it like one or not — companies en
 | 👤 **Profile** | Your name, email, and a custom avatar, stored right in your browser — no account required |
 | 🌗 **Dark mode** | A real second theme, not an inverted filter — remembered across reloads |
 | ⌨️ **Keyboard accessible** | Every chart is arrow-key navigable, not just mouse-hover |
+| 📋 **Clone A Company** | Copy an existing company's details as the starting point for a new one, instead of retyping industry, size, and HQ every time |
 | 📱 **Mobile-first** | Designed at 375px first, not squeezed in afterward |
+| ➕ **Add companies directly** | Create a company with the full field set right from the Companies page — no more routing through the application form's quick-add |
+| 🎉 **Offer confetti** | Move an application to Offer and the app celebrates with you |
+| 📅 **Calendar integration** | Log an interview and add it to your calendar — download an .ics file or open a pre-filled Google Calendar link |
+| 📎 **Resume & cover letter per application** | Attach the exact files you sent for each application, stored right in your browser |
+| 🔗 **Portfolio** | Add portfolio, GitHub, or personal-site links to your profile |
+
 
 ## Why
 
@@ -69,6 +76,30 @@ Every chart on the Insights page supports `role="application"` keyboard navigati
 ### Mobile-first
 
 Every layout was designed at a 375px viewport first, not adapted afterward. Verified: zero horizontal overflow, stat tiles collapse to two columns, charts stack to one, and the Kanban board scrolls its columns instead of squeezing them.
+
+### Clone a company
+
+Adding near-identical companies used to mean retyping the same industry, size, and HQ city every time. A duplicate action on any company now copies its details into a fresh Add Company form, pre-filled and ready to edit — change the name, fix what's different, save.
+
+### Add companies directly
+
+The Companies page now has its own "Add company" flow with the full field set — name, industry, size, HQ city, website, logo — not just the quick-add shortcut buried inside the application form. Useful for building out your company list before you have an application to attach to one.
+
+### Confetti on Offer
+
+There's exactly one status change worth celebrating. Move an application to Offer — on the board with a drag, or from the edit form — and a short confetti burst fires. Small, but it's the one moment in the app that's allowed to be a little extra.
+
+### Calendar integration
+
+Logging an interview now gets it onto your actual calendar in one click, two ways: download an .ics file that opens in any calendar app, or jump straight to a pre-filled "Add to Google Calendar" link. Round, date, and interviewer carry over, so you're not retyping what you just logged.
+
+### Resume & cover letter per application
+
+Every application can carry its own resume and cover letter — genuinely useful once you're tailoring them per role, since "which version did I send this company" stops being a guess. Like the profile avatar, these are real files, compressed client-side and stored in the browser rather than uploaded anywhere.
+
+### Portfolio
+
+The Profile page now has a portfolio section — links only (GitHub, a personal site, a hosted case study, whatever's relevant), not file uploads, so it stays light next to the avatar and contact details already there.
 
 ## Two standout features
 
@@ -124,6 +155,7 @@ Applications are read with `companies` expanded (`_expand=company`) and intervie
 2. **Ephemeral disk on Render.** Writes to `db.json` don't persist across a redeploy or a wake-from-sleep. Fine for a demo/mock API — just don't expect data you added yesterday to still be there after Render restarts the instance.
 3. **SPA refresh 404 on Vercel.** A Vite SPA needs a rewrite rule so deep links like `/board` don't 404 on a hard refresh or direct URL visit — add a `vercel.json` with a catch-all rewrite to `/index.html`.
 4. **Profile data is per-browser.** It lives in `localStorage`, not the backend — it won't follow you to another device or browser, and clearing site data clears it.
+
 
 ## Project structure
 
