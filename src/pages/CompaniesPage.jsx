@@ -16,6 +16,8 @@ import {
   ActionIcon,
   Menu,
   Avatar,
+  Button,
+  Modal,
 } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import {
@@ -29,6 +31,7 @@ import {
   IconShare2,
   IconLink,
   IconBriefcase,
+  IconPlus,
 } from '@tabler/icons-react';
 import { notifications } from '@mantine/notifications';
 import { motion } from 'motion/react';
@@ -36,6 +39,7 @@ import { getCompanies } from '../api/companies';
 import ErrorState from '../components/ui/ErrorState';
 import Empty from '../components/ui/Empty';
 import { CompanyCardsSkeleton } from '../components/ui/Skeletons';
+import QuickAddCompanyForm from '../components/companies/QuickAddCompanyForm';
 
 /**
  * Premium Companies Directory Page
@@ -50,6 +54,7 @@ import { CompanyCardsSkeleton } from '../components/ui/Skeletons';
  * - Share options
  * - Responsive grid layout
  * - Dark mode support
+ * - Add-company button + modal (duplicate-checked via QuickAddCompanyForm)
  */
 // Builds a Google favicon URL for a given website — used as the fallback
 // when Clearbit's logo doesn't load. Google's favicon service is on a core
@@ -71,6 +76,7 @@ export default function CompaniesPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [industryFilter, setIndustryFilter] = useState(null);
   const [bookmarked, setBookmarked] = useState(new Set());
+  const [addOpen, setAddOpen] = useState(false);
 
   // Load companies on mount
   useEffect(() => {
@@ -173,6 +179,44 @@ export default function CompaniesPage() {
     [companies]
   );
 
+  /**
+   * Called by QuickAddCompanyForm on success. Guards against appending a
+   * duplicate card when the person picks "Use <existing>" from the
+   * duplicate-detection warning instead of actually creating a new row —
+   * in that case `company` is already present in `companies`.
+   */
+  function handleCompanyCreated(company) {
+    setCompanies((prev) => {
+      if (!prev) return prev;
+      if (prev.some((c) => c.id === company.id)) return prev;
+      // Run the same logo-enrichment step newly created companies would
+      // otherwise miss until the next full reload.
+      const withLogo =
+        !company.logo && company.website
+          ? { ...company, logo: googleFaviconUrl(company.website) ?? undefined }
+          : company;
+      return [...prev, withLogo];
+    });
+    notifications.show({ message: `${company.name} added`, color: 'teal', autoClose: 2000 });
+    setAddOpen(false);
+  }
+
+  const addCompanyButton = (
+    <Button leftSection={<IconPlus size={16} />} onClick={() => setAddOpen(true)}>
+      Add company
+    </Button>
+  );
+
+  const addCompanyModal = (
+    <Modal opened={addOpen} onClose={() => setAddOpen(false)} title="Add a company" centered>
+      <QuickAddCompanyForm
+        companies={companies ?? []}
+        onCancel={() => setAddOpen(false)}
+        onCreated={handleCompanyCreated}
+      />
+    </Modal>
+  );
+
   // Error state
   if (error) {
     return <ErrorState message={error} onRetry={loadCompanies} />;
@@ -195,16 +239,35 @@ export default function CompaniesPage() {
     );
   }
 
-  // Empty state
+  // Empty state — still needs the Add-company entry point, otherwise a
+  // brand-new user has no way in at all.
   if (companies.length === 0) {
-    return <Empty message="No companies added yet. Start building your network!" />;
+    return (
+      <Stack gap="md">
+        <Group justify="space-between" wrap="wrap">
+          <Text fw={700} size="xl">
+            Companies
+          </Text>
+          {addCompanyButton}
+        </Group>
+        <Empty
+          message="No companies added yet. Start building your network!"
+          action={
+            <Button size="xs" variant="light" onClick={() => setAddOpen(true)}>
+              Add your first company
+            </Button>
+          }
+        />
+        {addCompanyModal}
+      </Stack>
+    );
   }
 
   // No results after filtering
   if (filteredCompanies.length === 0) {
     return (
       <Stack gap="md">
-        <PageHeader companiesCount={companies.length} />
+        <PageHeader companiesCount={companies.length} action={addCompanyButton} />
         <SearchAndFilters
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
@@ -219,6 +282,7 @@ export default function CompaniesPage() {
               : 'No companies yet'
           }
         />
+        {addCompanyModal}
       </Stack>
     );
   }
@@ -226,7 +290,7 @@ export default function CompaniesPage() {
   return (
     <Stack gap="lg">
       {/* Page Header */}
-      <PageHeader companiesCount={filteredCompanies.length} total={companies.length} />
+      <PageHeader companiesCount={filteredCompanies.length} total={companies.length} action={addCompanyButton} />
 
       {/* Search and Filters */}
       <SearchAndFilters
@@ -256,6 +320,8 @@ export default function CompaniesPage() {
           Showing {filteredCompanies.length} of {companies.length} companies
         </Text>
       </Group>
+
+      {addCompanyModal}
     </Stack>
   );
 }
@@ -263,7 +329,7 @@ export default function CompaniesPage() {
 /**
  * Page header with title and description
  */
-function PageHeader({ companiesCount = 0, total = 0 }) {
+function PageHeader({ companiesCount = 0, total = 0, action = null }) {
   return (
     <Box
       style={{
@@ -290,6 +356,15 @@ function PageHeader({ companiesCount = 0, total = 0 }) {
             {total > companiesCount && ` (${total} total)`} — Build your professional network
           </Text>
         </div>
+        {/* Button sits on a colored gradient header, so it needs the
+            "white" variant to stay legible instead of inheriting the
+            default filled-teal style, which would blend into the
+            gradient at some viewport widths. */}
+        {action && (
+          <Box style={{ flexShrink: 0 }}>
+            {action}
+          </Box>
+        )}
       </Group>
     </Box>
   );
