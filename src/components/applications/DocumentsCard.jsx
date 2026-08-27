@@ -13,12 +13,16 @@ import DocumentUploadSlot from "./DocumentUploadSlot";
 export default function DocumentsCard({ applicationId }) {
   const [documents, setDocuments] = useState(() => getDocuments(applicationId));
 
+
+  
   function handleSave(slot, doc) {
     setDocuments(setDocument(applicationId, slot, doc));
+     
   }
 
   function handleRemove(slot) {
     setDocuments(removeDocument(applicationId, slot));
+     
   }
 
   return (

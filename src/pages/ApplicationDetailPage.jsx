@@ -1,5 +1,5 @@
 // src/pages/ApplicationDetailPage.jsx
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
   Stack,
@@ -29,6 +29,7 @@ import {
   downloadICS,
   buildGoogleCalendarUrl,
 } from "../lib/ics";
+import { calculateQualityScore, getQualityStatus } from '../lib/qualityScoreCalculator';
 import { getApplication } from "../api/applications";
 import { deleteInterview } from "../api/interviews";
 import { formatSalary, formatDate } from "../lib/format";
@@ -44,136 +45,258 @@ export default function ApplicationDetailPage() {
   const [application, setApplication] = useState(null);
   const [error, setError] = useState(null);
   const [logModalOpen, setLogModalOpen] = useState(false);
+  const [qualityScore, setQualityScore] = useState(0);
 
-  const [loadedForId, setLoadedForId] = useState(id);
-  if (id !== loadedForId) {
-    setLoadedForId(id);
-    setApplication(null);
-    setError(null);
-  }
+  // Refs for cleanup and mounted check
+  const isMountedRef = useRef(true);
+  const checkIntervalRef = useRef(null);
 
+  
   // Bumped to force a re-fetch of the same id — used both for the error
   // Retry button and to pull fresh data after logging/deleting an
   // interview, since interviews are embedded on this same record.
   const [retryToken, setRetryToken] = useState(0);
-  const refresh = () => setRetryToken((t) => t + 1);
+  const refresh = useCallback(() => {
+    setRetryToken((t) => t + 1);
+  }, []);
 
-  useEffect(() => {
-    let cancelled = false;
-    getApplication(id)
-      .then((data) => {
-        if (!cancelled) {
-          setApplication(data);
-          setError(null);
-        }
-      })
-      .catch((err) => {
-        if (!cancelled) setError(err.message);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [id, retryToken]);
+  /**
+   * Recalculate quality score
+   * Called when application data changes or files are uploaded
+   */
+  const updateQualityScore = useCallback((app) => {
+    if (!app || !isMountedRef.current) return;
 
-  function retry() {
-    setApplication(null);
-    setError(null);
-    refresh();
-  }
-
-  function handleAddToCalendar(iv) {
     try {
-      const ics = buildInterviewICS({
-        uid: `interview-${iv.id}@traject.app`,
-        dateStr: iv.date,
-        durationMinutes: 60,
-        summary: `${iv.round} interview — ${application.role} at ${application.company?.name ?? "—"}`,
-        description: [
-          `Interviewer: ${iv.interviewer}`,
-          `Format: ${iv.format}`,
-          iv.notes ? `Notes: ${iv.notes}` : null,
-        ]
-          .filter(Boolean)
-          .join("\n"),
-        location:
-          iv.format === "onsite"
-            ? (application.company?.hqCity ?? "")
-            : iv.format,
-      });
-      downloadICS(
-        `${application.role.replace(/\s+/g, "-").toLowerCase()}-${iv.round}`,
-        ics,
-      );
+      const score = calculateQualityScore(app);
+      setQualityScore(score);
     } catch (err) {
-      notifications.show({
-        title: "Couldn't create calendar file",
-        message: err.message,
-        color: "red",
-      });
+      console.error("Error calculating quality score:", err);
     }
-  }
+  }, []);
 
-  function confirmDeleteInterview(interview) {
-    modals.openConfirmModal({
-      title: "Delete this interview?",
-      children: (
-        <Text size="sm">
-          {interview.round} with {interview.interviewer} — this can't be undone.
-        </Text>
-      ),
-      labels: { confirm: "Delete", cancel: "Cancel" },
-      confirmProps: { color: "red" },
-      onConfirm: async () => {
-        try {
-          await deleteInterview(interview.id);
-          notifications.show({ message: "Interview deleted", color: "gray" });
-          refresh();
-        } catch (err) {
-          notifications.show({
-            title: "Couldn't delete interview",
-            message: err.message,
-            color: "red",
-            icon: <IconX size={16} />,
-          });
-        }
-      },
+ /**
+ * Retry handler
+ */
+const retry = useCallback(() => {
+  setApplication(null);
+  setQualityScore(0);
+  setError(null);
+  refresh();
+}, [refresh]);
+
+/**
+ * Reset state when application ID changes
+ */
+// eslint-disable-next-line react-hooks/set-state-in-effect
+useEffect(() => {
+  setApplication(null);
+  setQualityScore(0);
+  setError(null);
+}, [id]);
+
+/**
+ * Real-time quality score updates
+ * Detects when resume/cover letter are uploaded to localStorage
+ */
+useEffect(() => {
+  if (!application || !isMountedRef.current) return;
+
+  // Listen for storage changes from other tabs/windows
+  const handleStorageChange = (e) => {
+    if (
+      e.key === `resume_${application.id}` ||
+      e.key === `coverLetter_${application.id}`
+    ) {
+      updateQualityScore(application);
+    }
+  };
+
+  window.addEventListener('storage', handleStorageChange);
+
+  // Check every 500ms for localStorage changes in THIS tab
+  const intervalId = setInterval(() => {
+    if (isMountedRef.current && application) {
+      updateQualityScore(application);
+    }
+  }, 500);
+
+  checkIntervalRef.current = intervalId;
+
+  return () => {
+    window.removeEventListener('storage', handleStorageChange);
+    clearInterval(intervalId);
+  };
+}, [application, updateQualityScore]);
+
+/**
+ * Fetch application data
+ */
+useEffect(() => {
+  let cancelled = false;
+
+  getApplication(id)
+    .then((data) => {
+      if (!cancelled && isMountedRef.current) {
+        setApplication(data);
+        setError(null);
+        updateQualityScore(data);
+      }
+    })
+    .catch((err) => {
+      if (!cancelled && isMountedRef.current) {
+        setError(err.message);
+      }
     });
-  }
 
-  function handleAddToGoogleCalendar(iv) {
-    try {
-      const url = buildGoogleCalendarUrl({
-        dateStr: iv.date,
-        durationMinutes: 60,
-        summary: `${iv.round} interview — ${application.role} at ${application.company?.name ?? "—"}`,
-        description: [
-          `Interviewer: ${iv.interviewer}`,
-          `Format: ${iv.format}`,
-          iv.notes ? `Notes: ${iv.notes}` : null,
-        ]
-          .filter(Boolean)
-          .join("\n"),
-        location:
-          iv.format === "onsite"
-            ? (application.company?.hqCity ?? "")
-            : iv.format,
+  return () => {
+    cancelled = true;
+  };
+}, [id, retryToken, updateQualityScore]);
+
+  /**
+   * Download interview as .ics file
+   */
+  const handleAddToCalendar = useCallback(
+    (iv) => {
+      try {
+        const ics = buildInterviewICS({
+          uid: `interview-${iv.id}@traject.app`,
+          dateStr: iv.date,
+          durationMinutes: 60,
+          summary: `${iv.round} interview — ${application.role} at ${
+            application.company?.name ?? "—"
+          }`,
+          description: [
+            `Interviewer: ${iv.interviewer}`,
+            `Format: ${iv.format}`,
+            iv.notes ? `Notes: ${iv.notes}` : null,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+          location:
+            iv.format === "onsite"
+              ? (application.company?.hqCity ?? "")
+              : iv.format,
+        });
+        downloadICS(
+          `${application.role.replace(/\s+/g, "-").toLowerCase()}-${iv.round}`,
+          ics,
+        );
+      } catch (err) {
+        notifications.show({
+          title: "Couldn't create calendar file",
+          message: err.message,
+          color: "red",
+        });
+      }
+    },
+    [application],
+  );
+
+  /**
+   * Confirm and delete interview
+   */
+  const confirmDeleteInterview = useCallback(
+    (interview) => {
+      modals.openConfirmModal({
+        title: "Delete this interview?",
+        children: (
+          <Text size="sm">
+            {interview.round} with {interview.interviewer} — this can't be
+            undone.
+          </Text>
+        ),
+        labels: { confirm: "Delete", cancel: "Cancel" },
+        confirmProps: { color: "red" },
+        onConfirm: async () => {
+          try {
+            await deleteInterview(interview.id);
+            notifications.show({
+              message: "Interview deleted",
+              color: "gray",
+            });
+            refresh();
+          } catch (err) {
+            notifications.show({
+              title: "Couldn't delete interview",
+              message: err.message,
+              color: "red",
+              icon: <IconX size={16} />,
+            });
+          }
+        },
       });
-      window.open(url, "_blank", "noopener,noreferrer");
-    } catch (err) {
-      notifications.show({
-        title: "Couldn't open Google Calendar",
-        message: err.message,
-        color: "red",
-      });
+    },
+    [refresh],
+  );
+
+  /**
+   * Add interview to Google Calendar
+   */
+  const handleAddToGoogleCalendar = useCallback(
+    (iv) => {
+      try {
+        const url = buildGoogleCalendarUrl({
+          dateStr: iv.date,
+          durationMinutes: 60,
+          summary: `${iv.round} interview — ${application.role} at ${
+            application.company?.name ?? "—"
+          }`,
+          description: [
+            `Interviewer: ${iv.interviewer}`,
+            `Format: ${iv.format}`,
+            iv.notes ? `Notes: ${iv.notes}` : null,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+          location:
+            iv.format === "onsite"
+              ? (application.company?.hqCity ?? "")
+              : iv.format,
+        });
+        window.open(url, "_blank", "noopener,noreferrer");
+      } catch (err) {
+        notifications.show({
+          title: "Couldn't open Google Calendar",
+          message: err.message,
+          color: "red",
+        });
+      }
+    },
+    [application],
+  );
+
+  /**
+   * Handle interview logged
+   */
+  const handleInterviewLogged = useCallback(() => {
+    setLogModalOpen(false);
+    notifications.show({
+      title: "Interview logged",
+      color: "teal",
+      icon: <IconCheck size={16} />,
+    });
+    refresh();
+  }, [refresh]);
+
+  /**
+   * Handle documents updated (resume/cover letter)
+   * This callback is passed to DocumentsCard to trigger quality score update
+   */
+  const handleDocumentsUpdated = useCallback(() => {
+    if (application && isMountedRef.current) {
+      updateQualityScore(application);
     }
-  }
+  }, [application, updateQualityScore]);
 
   if (error) return <ErrorState message={error} onRetry={retry} />;
   if (!application) return <Loader label="Loading application…" />;
 
+  const qualityStatus = getQualityStatus(qualityScore);
+
   return (
     <Stack gap="md">
-      
       <Anchor component={Link} to="/applications" size="sm">
         <Group gap={4}>
           <IconArrowLeft size={14} /> Back to applications
@@ -228,7 +351,7 @@ export default function ApplicationDetailPage() {
         </Stack>
       </Card>
 
-      <DocumentsCard applicationId={id}/>
+     
 
       <Group justify="space-between" mb="sm">
         <Text fw={600}>Interview timeline</Text>
@@ -297,7 +420,18 @@ export default function ApplicationDetailPage() {
           </Text>
         )}
       </div>
-      <QualityScoreCard application={application} />
+       {/* Documents card - Pass callback for quality score updates */}
+      <DocumentsCard
+        applicationId={id}
+        onDocumentsUpdated={handleDocumentsUpdated}
+      />
+
+      {/* Quality Score Card - Real-time updates */}
+      <QualityScoreCard
+        application={application}
+        qualityScore={qualityScore}
+        qualityStatus={qualityStatus}
+      />
 
       <Button
         component={Link}
@@ -312,16 +446,8 @@ export default function ApplicationDetailPage() {
         opened={logModalOpen}
         onClose={() => setLogModalOpen(false)}
         applicationId={id}
-        onCreated={() => {
-          setLogModalOpen(false);
-          notifications.show({
-            title: "Interview logged",
-            color: "teal",
-            icon: <IconCheck size={16} />,
-          });
-          refresh();
-        }}
-      />
+        onCreated={handleInterviewLogged}/> 
+          
     </Stack>
   );
 }

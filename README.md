@@ -1,11 +1,11 @@
-# Traject
+# TRAJECT
 
-**Chart your traject to the offer.**
+**JOB HUNTING,ORGANIZED**
 
 A job search is a pipeline whether you track it like one or not — companies enter, some fall away, a few close as offers. Traject just makes that pipeline visible: drag applications across five stages on a real Kanban board, watch the shape of your search take form on an Insights dashboard, and keep every company's real logo, contacts, and history one click away. Built for anyone who's tired of a spreadsheet pretending to be a CRM.
 
-**Live app:** [https://traject-job-search-app.vercel.app/]
-**Mock API:** [https://traject-ljb8.onrender.com]
+**Live app:** [https://traject-xi.vercel.app/]
+**Mock API:** [https://traject-va0w.onrender.com/]
 
 ---
 

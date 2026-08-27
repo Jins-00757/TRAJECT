@@ -9,6 +9,8 @@ export const QualityScoreCard = ({ application }) => {
   const score = calculateQualityScore(application);
   const { status, color, icon } = getQualityStatus(score);
 
+  
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Stack gap="md">
@@ -34,30 +36,7 @@ export const QualityScoreCard = ({ application }) => {
         {/* Breakdown */}
         <Stack gap="xs">
           {" "}
-          <Group justify="space-between" grow>
-            <div>
-              <Text size="xs" c="dimmed">
-                Resume
-              </Text>{" "}
-              <Text size="sm" fw={600}>
-                {" "}
-                {application.resume && application.resume.trim()
-                  ? "✓ Added"
-                  : "✗ Missing"}
-              </Text>
-            </div>
-            <div>
-              <Text size="xs" c="dimmed">
-                Cover Letter
-              </Text>
-              <Text size="sm" fw={600}>
-                {" "}
-                {application.coverLetter && application.coverLetter.trim()
-                  ? "✓ Added"
-                  : "✗ Missing"}{" "}
-              </Text>{" "}
-            </div>{" "}
-          </Group>
+          
           <Group justify="space-between" grow>
             <div>
               <Text size="xs" c="dimmed">
