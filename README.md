@@ -27,7 +27,7 @@ A job search is a pipeline whether you track it like one or not — companies en
 | 📅 **Calendar integration** | Log an interview and add it to your calendar — download an .ics file or open a pre-filled Google Calendar link |
 | 📎 **Resume & cover letter per application** | Attach the exact files you sent for each application, stored right in your browser |
 | 🔗 **Portfolio** | Add portfolio, GitHub, or personal-site links to your profile |
-| 📊 **Application Quality Score** | The Application Quality Score is a real-time metric that measures how complete and organized each job application is. It helps you prioritize which applications need attention and shows you exactly what's missing. |
+| 📊 **Application Quality Score** | The Application Quality Score is a real-time metric that measures how complete and organized each job application is according to interviews round. It helps you prioritize which applications need attention and shows you exactly what's missing. |
 
 
 ## Quality Status Badges
@@ -38,18 +38,14 @@ The score displays with color-coded status:
 - ⭐ Excellent (80-99%) — Very complete application, ready to follow up
 - ✓ Good (60-79%) — Most components completed
 - ⚠️ Fair (40-59%) — Missing some key information
-- ✕ Needs Work (0-39%) — Add resume, cover letter, or interview notes
+
 
 
 ## Real-Time Updates:
 
-**The quality score automatically recalculates whenever you:**
+**The quality score automatically recalculates whenever you looged a interview round**
 
-Add or update a resume
-Add or update a cover letter
 Log an interview
-Add follow-up dates
-Write application notes
 Receive an offer
 Viewing Your Scores
 
@@ -64,7 +60,7 @@ Quick visual reference for completeness
 
 Quality score badge on each application card
 Applications sorted by quality score (best first)
-Quickly identify which apps need attention
+Quickly identify which applications need attention
 
 
 ## Why
