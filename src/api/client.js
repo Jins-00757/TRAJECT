@@ -1,11 +1,20 @@
 import axios from "axios";
 
+// Use Render backend in production, localhost in development
+const baseURL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.DEV 
+    ? "http://localhost:5005" 
+    : "https://traject-ljb8.onrender.com");
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || "http://localhost:3000",
+  baseURL: baseURL,
   timeout: 10000,
 });
 
 api.interceptors.response.use(
   (r) => r,
-  (err) => { console.error("API error:", err.response?.status, err.message); return Promise.reject(err); }
+  (err) => { 
+    console.error("API error:", err.response?.status, err.message); 
+    return Promise.reject(err); 
+  }
 );
