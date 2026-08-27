@@ -77,8 +77,8 @@ export default function LogInterviewModal({
 
   return (
     <Modal opened={opened} onClose={onClose} title="Log an interview" centered>
-      <form onSubmit={submit} noValidate>
-        <Stack gap="sm">
+      <form  style={{ overflow: 'visible'}}onSubmit={submit} noValidate>
+        <Stack gap="sm" style={{ overflow: 'visible'}}>
           <Select
             label="Round"
             data={ROUND_OPTIONS}
