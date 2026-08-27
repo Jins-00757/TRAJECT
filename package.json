@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "api:dev": "json-server db.json --host localhost --port 3000",
-    "api:start": "json-server db.json --host 0.0.0.0 --port $PORT",
+    "api:start": "json-server db.json --host 0.0.0.0 --port $PORT --cors",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
