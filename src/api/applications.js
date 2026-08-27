@@ -8,5 +8,7 @@ export const getApplication = (id) =>
   api.get(`/applications/${id}`, { params: { _expand: "company", _embed: "interviews" } }).then((r) => r.data);
 
 export const createApplication = (data) => api.post("/applications", data).then((r) => r.data);
+
 export const updateApplication = (id, patch) => api.patch(`/applications/${id}`, patch).then((r) => r.data);
+
 export const deleteApplication = (id) => api.delete(`/applications/${id}`);

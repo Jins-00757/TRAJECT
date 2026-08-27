@@ -1438,28 +1438,6 @@
       "order": 44
     },
     {
-      "id": 46,
-      "companyId": 36,
-      "role": "Backend Developer",
-      "status": "wishlist",
-      "workMode": "onsite",
-      "location": "Lisbon, PT",
-      "salaryMin": 42000,
-      "salaryMax": 50000,
-      "currency": "EUR",
-      "source": "Landing.jobs",
-      "jobUrl": "https://jobs.example.com/posting/1046",
-      "appliedDate": "2026-08-29",
-      "lastActivityDate": "2026-08-25",
-      "priority": 2,
-      "tags": [
-        "node",
-        "backend"
-      ],
-      "notes": "",
-      "order": 45
-    },
-    {
       "id": 47,
       "companyId": 34,
       "role": "Software Engineer",
@@ -1484,7 +1462,7 @@
     {
       "status": "wishlist",
       "currency": "EUR",
-      "priority": 3,
+      "priority": 2,
       "tags": [],
       "role": "salesforce",
       "companyId": 2,
@@ -1492,7 +1470,7 @@
       "salaryMax": null,
       "notes": "",
       "appliedDate": "2026-08-26",
-      "lastActivityDate": "2026-08-26",
+      "lastActivityDate": "2026-08-27",
       "id": 48
     }
   ],
@@ -1930,22 +1908,42 @@
     {
       "applicationId": 43,
       "round": "final",
-      "interviewer": "jhbjh",
-      "format": "video",
-      "outcome": "pending",
-      "date": "2026-08-27T14:07",
-      "notes": "",
-      "id": 44
-    },
-    {
-      "applicationId": 43,
-      "round": "final",
       "interviewer": "jhjh",
       "format": "video",
       "outcome": "pending",
       "date": "2026-08-27T14:12",
       "notes": "",
       "id": 45
+    },
+    {
+      "applicationId": 2,
+      "round": "system-design",
+      "interviewer": "sahjsg",
+      "format": "video",
+      "outcome": "pending",
+      "date": "2026-08-27T14:52",
+      "notes": "",
+      "id": 47
+    },
+    {
+      "applicationId": 2,
+      "round": "final",
+      "interviewer": "hjj",
+      "format": "video",
+      "outcome": "pending",
+      "date": "2026-08-27T14:54",
+      "notes": "",
+      "id": 48
+    },
+    {
+      "applicationId": 2,
+      "round": "offer",
+      "interviewer": "jh",
+      "format": "video",
+      "outcome": "pending",
+      "date": "2026-08-27T15:07",
+      "notes": "",
+      "id": 49
     }
   ]
 }

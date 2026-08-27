@@ -60,7 +60,8 @@ const refetch = useCallback(() => {
 
   async function patchApplication(id, patch) {
     // Calculate quality score for the patched application
-    const currentApp = applications.find(a => a.id === id);
+    // FIX: Use String() to handle ID type mismatch (number vs string)
+    const currentApp = applications.find(a => String(a.id) === String(id));
     if (!currentApp) throw new Error("Application not found");
 
     const updatedAppData = { ...currentApp, ...patch };
@@ -74,13 +75,13 @@ const refetch = useCallback(() => {
     );
     try {
       const updated = await applicationsApi.updateApplication(id, patch);
-      
+
       // Ensure quality score is on the returned object
       const enriched = {
         ...updated,
         qualityScore: calculateQualityScore(updated)
       };
-      
+
       setApplications((prev) =>
         prev.map((a) => (a.id === id ? enriched : a))
       );
