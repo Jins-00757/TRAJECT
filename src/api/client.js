@@ -4,11 +4,11 @@ import axios from "axios";
 const baseURL = import.meta.env.VITE_API_URL || 
   (import.meta.env.DEV 
     ? "http://localhost:5005" 
-    : "https://traject-va0w.onrender.com/");
+    : "https://traject-va0w.onrender.com");
 
 export const api = axios.create({
   baseURL: baseURL,
-  timeout: 10000,
+  
 });
 
 api.interceptors.response.use(
