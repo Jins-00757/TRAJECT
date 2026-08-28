@@ -125,6 +125,7 @@ export default function ApplicationEditPage() {
   if (!application || !companies) return <Loader label="Loading…" />;
 
   return (
+    
     <Stack gap="md">
       <Group justify="space-between">
         <Text fw={700} size="xl">Edit application</Text>
